@@ -11,6 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -50,5 +51,7 @@ public class SimpleRPG extends JavaPlugin {
         getCommand("스텟").setExecutor(new StatCommand());
         InitGlobalValue.init();
     }
+
+
 }
 
