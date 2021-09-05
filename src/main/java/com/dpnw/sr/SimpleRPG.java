@@ -3,6 +3,8 @@ package com.dpnw.sr;
 import com.dpnw.sr.commands.SRCommands;
 import com.dpnw.sr.commands.StatCommand;
 import com.dpnw.sr.events.InventoryClickEvents;
+import com.dpnw.sr.events.InventoryCloseEvents;
+import com.dpnw.sr.events.PlayerEvents;
 import com.dpnw.sr.utils.GlobalValue;
 import com.dpnw.sr.utils.InitGlobalValue;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -42,8 +44,11 @@ public class SimpleRPG extends JavaPlugin {
         }
         config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "config.yml"));
         plugin.getServer().getPluginManager().registerEvents(new InventoryClickEvents(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new InventoryCloseEvents(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerEvents(), plugin);
         getCommand("sr").setExecutor(new SRCommands());
         getCommand("스텟").setExecutor(new StatCommand());
         InitGlobalValue.init();
     }
 }
+

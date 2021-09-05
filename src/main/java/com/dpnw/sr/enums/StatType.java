@@ -1,11 +1,11 @@
 package com.dpnw.sr.enums;
 
 public enum StatType {
-    DAMAGE("Damage"),
-    ARMOR("Armor"),
-    MAXHEALTH("MaxHealth"),
-    SPEED("Speed"),
-    JUMPPOWER("JumpPower"),
+    DAMAGE("DAMAGE"),
+    ARMOR("ARMOR"),
+    MAXHEALTH("MAXHEALTH"),
+    SPEED("SPEED"),
+    JUMPPOWER("JUMPPOWER"),
     ;
 
     private final String raw;
