@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.File;
+import java.math.BigInteger;
 import java.util.*;
 
 public class SRFunction {
@@ -70,7 +71,6 @@ public class SRFunction {
 
         YamlConfiguration data = udata.get(p.getUniqueId());
 
-
         im.setDisplayName("§6보유 스텟 포인트 : " + data.getInt("Player.StatPoint"));
         im.setLore(Arrays.asList("", ""));
         item.setItemMeta(im);
@@ -80,17 +80,68 @@ public class SRFunction {
         p.openInventory(inv);
     }
 
+    public static void addExp(Player p, BigInteger exp) {
+        YamlConfiguration data = udata.get(p.getUniqueId());
+        BigInteger fexp = new BigInteger(data.getString("Player.Exp"));
+        data.set("Player.Exp", fexp.add(exp));
+
+        int level = data.getInt("Player.Level");
+        BigInteger rexp = new BigInteger(config.getString("RLV." + (level + 1)));
+
+        int c = fexp.compareTo(rexp);
+        if (c == 1 || c == 0) {
+            data.set("Player.Level", level + 1);
+            fexp = fexp.subtract(rexp);
+            data.set("Player.Exp", fexp);
+            Bukkit.getScheduler().runTask(plugin, () -> saveData(p.getUniqueId()));
+        }
+    }
+    public static void subExp(Player p, BigInteger exp) {
+        YamlConfiguration data = udata.get(p.getUniqueId());
+        BigInteger fexp = new BigInteger(data.getString("Player.Exp"));
+        int c = fexp.compareTo(exp);
+        if (c == -1 || c == 0) {
+            data.set("Player.Exp", 0);
+        }
+        else {
+            data.set("Player.Exp",fexp.subtract(exp));
+        }
+    }
+    public static void setExp(Player p, BigInteger exp) {
+        YamlConfiguration data = udata.get(p.getUniqueId());
+        data.set("Player.Exp", exp);
+    }
+
+    public static void addLevel(Player p, int level) {
+        YamlConfiguration data = udata.get(p.getUniqueId());
+        int flevel = data.getInt("Player.Level");
+        data.set("Player.Level", flevel + level);
+    }
+
+    public static void subLevel(Player p, int level) {
+        YamlConfiguration data = udata.get(p.getUniqueId());
+        int flevel = data.getInt("Player.Level");
+        if (flevel - level <= 0) {
+            data.set("Player.Level", 0);
+        } else {
+            data.set("Player.Level", flevel - level);
+        }
+    }
+    public static void setLevel(Player p, int level) {
+        YamlConfiguration data = udata.get(p.getUniqueId());
+        data.set("Player.Level", level);
+    }
 
     public static void addStats(Player p, StatType statType, int point) {
         YamlConfiguration data = udata.get(p.getUniqueId());
 
         int statPoint = data.getInt("Player.StatPoint");
 
-        if(!(statPoint > 0)) {
+        if (!(statPoint > 0)) {
             p.sendMessage(SimpleRPG.getPrefix() + "보유 스텟 포인트가 부족합니다.");
             return;
         }
-        data.set("Player.StatPoint",statPoint-1);
+        data.set("Player.StatPoint", statPoint - 1);
         int stat = data.getInt("Player.Stats." + statType.getRaw());
         data.set("Player.Stats." + statType.getRaw(), stat + point);
         Bukkit.getScheduler().runTask(plugin, () -> saveData(p.getUniqueId()));
