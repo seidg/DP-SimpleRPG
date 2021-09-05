@@ -71,8 +71,8 @@ public class SRFunction {
 
         YamlConfiguration data = udata.get(p.getUniqueId());
 
-        im.setDisplayName("§6보유 스텟 포인트 : " + data.getInt("Player.StatPoint"));
-        im.setLore(Arrays.asList("", ""));
+        im.setDisplayName(" §f보유 스텟 ");
+        im.setLore(Arrays.asList("","§6DAMAGE : "+ data.getInt("Player.Stats.DAMAGE"),"§6ARMOR : "+ data.getInt("Player.Stats.ARMOR"),"§6MAXHEALTH : "+ data.getInt("Player.Stats.MAXHEALTH"),"§6SPEED : "+ data.getInt("Player.Stats.SPEED"),"§6JUMPPOWER : "+ data.getInt("Player.Stats.JUMPPOWER"),"","§6보유 스텟 포인트 : " + data.getInt("Player.StatPoint")));
         item.setItemMeta(im);
         inv.setItem(49, item);
 
