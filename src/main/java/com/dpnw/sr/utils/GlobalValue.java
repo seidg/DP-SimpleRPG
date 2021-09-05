@@ -1,6 +1,7 @@
 package com.dpnw.sr.utils;
 
 public record GlobalValue(double damage, double armor, double maxhealth, double speed, double jumppower, boolean useDamage, boolean useArmor, boolean useMaxHealth, boolean useSpeed, boolean useJumpPower) {
+
     @Override
     public double damage() {
         return damage;
