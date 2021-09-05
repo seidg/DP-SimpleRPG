@@ -1,7 +1,12 @@
 name: DPNW-SimpleRPG
-version: 1.0.0-SNAPSHOT
-main: com.dpnw.rtrpg.RTRPG
+version: 1.0.0.1
+main: com.dpnw.sr.SimpleRPG
 api-version: 1.17
 authors: [ DP_NETWORK ]
 commands:
   sr:
+  스텟:
+    aliases:
+      - stats
+      - stat
+      - tmxpt
