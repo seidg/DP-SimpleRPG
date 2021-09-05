@@ -1,1 +1,13 @@
 Settings:
+  uses:
+    DAMAGE: true
+    ARMOR: true
+    MAXHEALTH: true
+    SPEED: true
+    JUMPPOWER: true
+  multiplier:
+    DAMAGE: 1
+    ARMOR: 0.5
+    MAXHEALTH: 1
+    SPEED: 0.01
+    JUMPPOWER: 0.005
